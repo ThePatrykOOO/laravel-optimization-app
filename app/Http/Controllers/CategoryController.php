@@ -11,12 +11,11 @@ class CategoryController extends Controller
 {
     public function categoryListWithProduct(): AnonymousResourceCollection
     {
-        return Cache::remember('CategoryController.categoryListWithProduct', now()->addHour(), function () {
-            $categoryListWithProduct = Category::query()
+        $categoryListWithProduct = Cache::remember('categoryListWithProduct', now()->addHour(), function () {
+            return Category::query()
                 ->with('products')
                 ->get();
-
-            return CategoryResource::collection($categoryListWithProduct);
         });
+        return CategoryResource::collection($categoryListWithProduct);
     }
 }
