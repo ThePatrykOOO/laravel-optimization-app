@@ -11,7 +11,7 @@ class CategoryController extends Controller
     public function categoryListWithProduct(): AnonymousResourceCollection
     {
         $categoryListWithProduct = Category::query()
-//            ->with('products')
+            ->with('products')
             ->get();
 
         return CategoryResource::collection($categoryListWithProduct);
